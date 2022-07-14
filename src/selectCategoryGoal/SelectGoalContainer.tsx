@@ -15,7 +15,8 @@ export default ({navigation}) => {
         // setSelected: setSelectedGoal
     }
     const _navigation = {
-        navigateNext: () => navigation.navigate("SelectCategory"),
+        navigateNextDisabled: context.selectedGoal == null,
+        navigateNext: () => navigation.navigate("DescribeGoal"),
         navigatePrev: () => navigation.navigate("SelectCategory")
     }
     return (

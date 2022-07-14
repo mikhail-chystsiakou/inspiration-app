@@ -14,6 +14,8 @@ export function SelectCategoryContainer({navigation}) {
       )),
     }
     const _navigation = {
+      // allow skip category selection
+      // navigateNextDisabled: context.selectedCategory == null, 
       navigateNext: () => navigation.navigate("SelectGoal"),
     }
 

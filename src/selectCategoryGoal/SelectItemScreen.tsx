@@ -3,16 +3,10 @@ import ItemPreview from 'selectCategoryGoal/ItemPreview'
 import HeadedNavigation from 'components/HeadedNavigation';
 
 export default ({header, subHeader, items, navigation}) => {
-    const nextButtonExists = navigation.navigateNext != null;
-    const nextButtonEnabled = items.selected != null;
-
-    const prevButtonExists = navigation.navigatePrev != null;
-
     return (
         <HeadedNavigation 
          header={header}
          subHeader={subHeader}
-         items={items}
          navigation={navigation}
          >
             <View style={styles.items}>

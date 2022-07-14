@@ -1,10 +1,11 @@
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
-export default ({header, subHeader, items, navigation, children}) => {
+export default ({header, subHeader, navigation, children}) => {
     const nextButtonExists = navigation.navigateNext != null;
-    const nextButtonEnabled = items.selected != null;
-
     const prevButtonExists = navigation.navigatePrev != null;
+    const navigateNextLabel = navigation.navigateNextLabel || "Далее";
+
+    console.log()
 
     return (
         <View style={styles.container}>
@@ -17,21 +18,21 @@ export default ({header, subHeader, items, navigation, children}) => {
             {
                 prevButtonExists &&
                 <TouchableOpacity 
-                    style={styles.button}
+                    style={[styles.button, styles.buttonBack]}
                     onPress={navigation.navigatePrev}>
-                    <Text style={styles.buttonText}>Назад</Text>
+                    <Text style={[styles.buttonText, styles.buttonBackText]}>Назад</Text>
                 </TouchableOpacity>
             }
             {
                 nextButtonExists &&
                 <TouchableOpacity 
-                    disabled={!nextButtonEnabled}
+                    disabled={navigation.navigateNextDisabled}
                     style={[
                         styles.button, 
-                        !nextButtonEnabled && styles.buttonDisabled
+                        navigation.navigateNextDisabled && styles.buttonDisabled
                     ]}
                     onPress={navigation.navigateNext}>
-                    <Text style={styles.buttonText}>Далее</Text>
+                    <Text style={styles.buttonText}>{navigateNextLabel}</Text>
                 </TouchableOpacity>
             }
             
@@ -67,6 +68,11 @@ const styles = StyleSheet.create({
         shadowOffset : { width: 1, height: 5},
         flex: 1
     },
+    buttonBack: {
+        backgroundColor: "white",
+        borderColor: "#64ACFF",
+        borderWidth: 2,
+    },
     buttonDisabled: {
         backgroundColor: "#B2D6FF",
     },
@@ -75,6 +81,9 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 15,
         fontWeight: "500",
+    },
+    buttonBackText: {
+        color: "#64ACFF",
     },
     buttonsContainer: {
         flexDirection: "row"
