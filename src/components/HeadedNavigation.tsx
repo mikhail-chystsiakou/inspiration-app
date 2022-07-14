@@ -1,5 +1,4 @@
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import ItemPreview from 'selectCategoryGoal/ItemPreview'
 
 export default ({header, subHeader, items, navigation, children}) => {
     const nextButtonExists = navigation.navigateNext != null;
@@ -11,18 +10,9 @@ export default ({header, subHeader, items, navigation, children}) => {
         <View style={styles.container}>
         <Text style={styles.header}>{header}</Text>
         <Text style={styles.subHeader}>{subHeader}</Text>
-        <View style={styles.items}>
-            {items.all.map(c => {
-                return (
-                  <ItemPreview key={c.name} 
-                    name={c.name} img={c.img}
-                    selectedItem={items.selected}
-                    setSelectedItem={items.setSelected}
-                  />
-                )
-            })
-        }
-        </View>
+
+        {children}
+
         <View style={styles.buttonsContainer}>
             {
                 prevButtonExists &&
@@ -66,13 +56,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: "center",
         fontWeight: "400",
-    },
-    items: {
-        flexWrap: "wrap",
-        flexDirection: "row",
-        flexGrow: 1,
-        flexBasis: "0px",
-        flexShrink: 1,
     },
     button: {
         backgroundColor: "#64ACFF",
