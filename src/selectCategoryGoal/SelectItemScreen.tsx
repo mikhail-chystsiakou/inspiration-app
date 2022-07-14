@@ -1,29 +1,31 @@
-import { useState } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import CategoryPreview from 'selectCategory/CategoryPreview'
+import ItemPreview from 'selectCategoryGoal/ItemPreview'
 
-export default ({categories}) => {
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    const buttonEnabled = selectedCategories.length > 0;
+export default ({header, subHeader, items, navigateNext}) => {
+    const buttonEnabled = items.selected != null;
     return (
         <View style={styles.container}>
-        <Text style={styles.stepNo}>Шаг 1 из 5</Text>
-        <Text style={styles.selectCategory}>Выберите категорию</Text>
-        <View style={styles.categories}>
-            {categories.map(c => {
+        <Text style={styles.header}>{header}</Text>
+        <Text style={styles.subHeader}>{subHeader}</Text>
+        <View style={styles.items}>
+            {items.all.map(c => {
                 return (
-                  <CategoryPreview key={c.name} name={c.name} img={c.img}
-                    selected={selectedCategories.includes(c.name)}
-                    setSelectedCategories={setSelectedCategories}
+                  <ItemPreview key={c.name} 
+                    name={c.name} img={c.img}
+                    selectedItem={items.selected}
+                    setSelectedItem={items.setSelected}
                   />
                 )
             })
         }
         </View>
-        <TouchableOpacity disabled={!buttonEnabled} style={[
+        <TouchableOpacity 
+          disabled={!buttonEnabled} 
+          style={[
             styles.button, 
             buttonEnabled && styles.buttonEnabled
-            ]}>
+          ]}
+          onPress={navigateNext}>
             <Text style={styles.buttonText}>Далее</Text>
             </TouchableOpacity>
     </View>
@@ -35,19 +37,19 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20
     },
-    stepNo: {
+    header: {
         marginTop: 30,
         fontSize: 18,
         textAlign: "center",
         fontWeight: "500",
     },
-    selectCategory: {
+    subHeader: {
         marginVertical: 30,
         fontSize: 16,
         textAlign: "center",
         fontWeight: "400",
     },
-    categories: {
+    items: {
         flexWrap: "wrap",
         flexDirection: "row",
         flexGrow: 1,

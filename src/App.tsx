@@ -6,14 +6,15 @@ import { registerRootComponent } from 'expo';
 // import useCachedResources from './hooks/useCachedResources';
 // import useColorScheme from './hooks/useColorScheme';
 import { Text } from 'react-native';
-import SelectCategoryContainer from 'selectCategory/selectCategoryContainer';
+import SelectCategoryContainer from 'selectCategoryGoal/SelectCategoryContainer';
+import Navigation from 'navigation/Navigation'
 
 registerRootComponent(App);
 
 export default function App() {
     return (
       <SafeAreaProvider>
-        <SelectCategoryContainer/>
+        <Navigation/>
         <StatusBar />
       </SafeAreaProvider>
     );
