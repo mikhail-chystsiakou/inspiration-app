@@ -1,22 +1,24 @@
+import React, { useContext, useState } from "react";
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { registerRootComponent } from 'expo';
 
-// import Navigation from './navigation';
-// import useCachedResources from './hooks/useCachedResources';
-// import useColorScheme from './hooks/useColorScheme';
-import { Text } from 'react-native';
-import SelectCategoryContainer from 'selectCategoryGoal/SelectCategoryContainer';
-import Navigation from 'navigation/Navigation'
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-registerRootComponent(App);
+import Store from "Store"
+import Navigation from 'navigation/Navigation';
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+function App() {
     return (
       <SafeAreaProvider>
-        <Navigation/>
+        <Store>
+          <Navigation/>
+        </Store>
         <StatusBar />
       </SafeAreaProvider>
     );
-  // }
 }
+
+registerRootComponent(App);
