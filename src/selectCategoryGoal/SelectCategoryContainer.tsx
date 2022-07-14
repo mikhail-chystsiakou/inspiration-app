@@ -9,12 +9,14 @@ export default ({navigation}) => {
       selected: selectedCategory,
       setSelected: setSelectedCategory
     }
-    const navigateNext = () => navigation.navigate("SelectGoal");
+    const _navigation = {
+      navigateNext: () => navigation.navigate("SelectGoal"),
+  }
     return (
         <SelectItemScreen
           header="Шаг 1 из 5"
           subHeader="Выберите категорию"
-          navigateNext={navigateNext}
+          navigation={_navigation}
           items={_categories}
         />
     )

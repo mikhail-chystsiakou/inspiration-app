@@ -1,8 +1,12 @@
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import ItemPreview from 'selectCategoryGoal/ItemPreview'
 
-export default ({header, subHeader, items, navigateNext}) => {
-    const buttonEnabled = items.selected != null;
+export default ({header, subHeader, items, navigation}) => {
+    const nextButtonExists = navigation.navigateNext != null;
+    const nextButtonEnabled = items.selected != null;
+
+    const prevButtonExists = navigation.navigatePrev != null;
+
     return (
         <View style={styles.container}>
         <Text style={styles.header}>{header}</Text>
@@ -19,15 +23,29 @@ export default ({header, subHeader, items, navigateNext}) => {
             })
         }
         </View>
-        <TouchableOpacity 
-          disabled={!buttonEnabled} 
-          style={[
-            styles.button, 
-            buttonEnabled && styles.buttonEnabled
-          ]}
-          onPress={navigateNext}>
-            <Text style={styles.buttonText}>Далее</Text>
-            </TouchableOpacity>
+        <View style={styles.buttonsContainer}>
+            {
+                prevButtonExists &&
+                <TouchableOpacity 
+                    style={styles.button}
+                    onPress={navigation.navigatePrev}>
+                    <Text style={styles.buttonText}>Назад</Text>
+                </TouchableOpacity>
+            }
+            {
+                nextButtonExists &&
+                <TouchableOpacity 
+                    disabled={!nextButtonEnabled}
+                    style={[
+                        styles.button, 
+                        !nextButtonEnabled && styles.buttonDisabled
+                    ]}
+                    onPress={navigation.navigateNext}>
+                    <Text style={styles.buttonText}>Далее</Text>
+                </TouchableOpacity>
+            }
+            
+        </View>
     </View>
     )
 }
@@ -57,21 +75,25 @@ const styles = StyleSheet.create({
         flexShrink: 1,
     },
     button: {
-        backgroundColor: "#B2D6FF",
+        backgroundColor: "#64ACFF",
         borderRadius: 10,
         margin: 10,
         paddingVertical: 13,
         shadowColor: 'rgba(0, 0, 0, 0.15)',
         shadowRadius: 5,
         shadowOffset : { width: 1, height: 5},
+        flex: 1
     },
-    buttonEnabled: {
-        backgroundColor: "#64ACFF",
+    buttonDisabled: {
+        backgroundColor: "#B2D6FF",
     },
     buttonText: {
         color: "white",
         textAlign: "center",
         fontSize: 15,
         fontWeight: "500",
+    },
+    buttonsContainer: {
+        flexDirection: "row"
     }
 });
