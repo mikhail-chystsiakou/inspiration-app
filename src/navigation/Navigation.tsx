@@ -5,20 +5,13 @@ import SelectGoalContainer from "selectCategoryGoal/SelectGoalContainer"
 import DescribeGoal from "describeGoal/DescribeGoal";
 import GoalConfigurationFinished from "describeGoal/GoalConfigurationFinished";
 import { FirstScreen, SecondScreen, ThirdScreen } from "components/IntroComponents";
+import GoalScreen from "screens/GoalScreen";
+import TabNavigation from "./TabNavigation";
 
 const Stack = createNativeStackNavigator();
 
-const MyTheme = {
-    ...DefaultTheme,
-    colors: {
-      ...DefaultTheme.colors,
-      background: 'white'
-    },
-  };
-
 export default () => {
     return (
-    <NavigationContainer theme={MyTheme}>
         <Stack.Navigator
         screenOptions={{
             headerShown: false
@@ -30,7 +23,7 @@ export default () => {
             <Stack.Screen name="SelectGoal" component={SelectGoalContainer} />
             <Stack.Screen name="DescribeGoal" component={DescribeGoal} />
             <Stack.Screen name="GoalConfigurationFinished" component={GoalConfigurationFinished} />
+            <Stack.Screen name="GoalScreen" component={TabNavigation} />
         </Stack.Navigator>
-    </NavigationContainer>
     )
 }

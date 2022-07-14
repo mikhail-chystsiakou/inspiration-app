@@ -10,7 +10,7 @@ export default ({navigation}) => {
         all: goals,
         selected: context.selectedGoal,
         setSelected: (goal) => setContext((_context) => (
-            {..._context, selectedGoal: goal}
+            {..._context, selectedGoal: goal, goalDescription: goal}
         ))
         // setSelected: setSelectedGoal
     }

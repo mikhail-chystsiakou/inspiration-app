@@ -9,35 +9,35 @@ export default ({header, subHeader, navigation, children}) => {
 
     return (
         <View style={styles.container}>
-        <Text style={styles.header}>{header}</Text>
-        <Text style={styles.subHeader}>{subHeader}</Text>
+            <Text style={styles.header}>{header}</Text>
+            <Text style={styles.subHeader}>{subHeader}</Text>
 
-        {children}
+            {children}
 
-        <View style={styles.buttonsContainer}>
-            {
-                prevButtonExists &&
-                <TouchableOpacity 
-                    style={[styles.button, styles.buttonBack]}
-                    onPress={navigation.navigatePrev}>
-                    <Text style={[styles.buttonText, styles.buttonBackText]}>Назад</Text>
-                </TouchableOpacity>
-            }
-            {
-                nextButtonExists &&
-                <TouchableOpacity 
-                    disabled={navigation.navigateNextDisabled}
-                    style={[
-                        styles.button, 
-                        navigation.navigateNextDisabled && styles.buttonDisabled
-                    ]}
-                    onPress={navigation.navigateNext}>
-                    <Text style={styles.buttonText}>{navigateNextLabel}</Text>
-                </TouchableOpacity>
-            }
-            
+            <View style={styles.buttonsContainer}>
+                {
+                    prevButtonExists &&
+                    <TouchableOpacity 
+                        style={[styles.button, styles.buttonBack]}
+                        onPress={navigation.navigatePrev}>
+                        <Text style={[styles.buttonText, styles.buttonBackText]}>Назад</Text>
+                    </TouchableOpacity>
+                }
+                {
+                    nextButtonExists &&
+                    <TouchableOpacity 
+                        disabled={navigation.navigateNextDisabled}
+                        style={[
+                            styles.button, 
+                            navigation.navigateNextDisabled && styles.buttonDisabled
+                        ]}
+                        onPress={navigation.navigateNext}>
+                        <Text style={styles.buttonText}>{navigateNextLabel}</Text>
+                    </TouchableOpacity>
+                }
+                
+            </View>
         </View>
-    </View>
     )
 }
 

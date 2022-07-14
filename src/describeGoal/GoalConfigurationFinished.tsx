@@ -9,7 +9,7 @@ export default ({navigation}) => {
     console.log("finish: " + JSON.stringify(context));
 
     const _navigation = {
-        navigateNext: () => {navigation.navigate("SelectCategory")},
+        navigateNext: () => {navigation.navigate("GoalScreen")},
         navigateNextLabel: "Перейти к каналам",
     }
     return (
@@ -19,13 +19,16 @@ export default ({navigation}) => {
           navigation={_navigation}
         >
             <View style={styles.imageContainer}>
-                <Image style={styles.image} source={require("assets/intro/gomer.png")}/>
-                <Text style={styles.smallText}>Категория: {context.selectedCategory}</Text>
+                <View style={{flex: 1}}>
+                    <Image style={styles.image} source={require("assets/intro/gomer.png")}/>
+
+                </View>
+                {/* <Text style={styles.smallText}>Категория: {context.selectedCategory}</Text>
                 <Text style={styles.smallText}>Цель: {context.selectedGoal}</Text>
                 <Text style={styles.smallText}>Описание: {context.goalDescription}</Text>
                 <Text style={styles.smallText}>Критерии достижения: {context.goalCriteria}</Text>
                 <Text style={styles.smallText}>Дедлайн: {context.goalDeadline}</Text>
-                <Text style={styles.smallText}>Зачем: {context.goalReason}</Text>
+                <Text style={styles.smallText}>Зачем: {context.goalReason}</Text> */}
                 <View style={styles.textContainer}>
                     <Text style={styles.text}>Пока можешь почитать полезные каналы по своей теме</Text>
                 </View>
@@ -40,11 +43,14 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "space-between",
         alignItems: "center",
+        paddingBottom: 10,
     },
     image: {
         width: 250,
         height: 200,
-        marginLeft: 50,
+        marginLeft: 40,
+        marginVertical: "auto",
+        // flex: 1,
     },
     textContainer: {
         justifyContent: "flex-end",
