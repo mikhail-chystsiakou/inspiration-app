@@ -1,11 +1,13 @@
 import { Text, View, StyleSheet, Image, Pressable, TouchableOpacity } from "react-native";
 import ideasShop from "const/ideasShop"
 import ItemPreview from "selectCategoryGoal/ItemPreview";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { GlobalContext } from "Store";
 
 const coinIcon = require('assets/shop/coin.png');
 
 export default () => {
+    const [context, setContext] = useContext(GlobalContext);
     const [selectedItem, setSelectedItem] = useState();
     const items = {
         all: ideasShop,
@@ -19,7 +21,7 @@ export default () => {
             </View> 
             <View style={styles.coinContainer}>
                 <Image source={coinIcon} style={styles.coin} />
-                <Text style={styles.coinNumber}>0</Text>
+                <Text style={styles.coinNumber}>{context.coins}</Text>
             </View>
             <Text style={[styles.suggest, {marginTop: 10}]}>Как заработать?</Text>
             <Text style={styles.shopHeader}>Магазин идей</Text>

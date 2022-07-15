@@ -144,23 +144,24 @@ export default ({navigation})=>{
                 <TouchableOpacity style={[buttonStyle.enabled, {marginBottom: 5, marginTop: 0}]}
                 onPress={() => {
                     pepaStart();
-                    setReport("")
+                    setReport("");
                     if (context.secondStepStatus == "progress") {
                         console.log("gosecond")
-                        setContext({...context, secondStepStatus: "done", thirdStepStatus: "progress"})
+                        setContext({...context, secondStepStatus: "done", thirdStepStatus: "progress", coins: context.coins+10})
+                        
                         return;
                     } 
                     if (context.thirdStepStatus == "progress") {
                         console.log("gosecond2")
-                        setContext({...context, thirdStepStatus: "done", fourthStepStatus: "progress"})
+                        setContext({...context, thirdStepStatus: "done", fourthStepStatus: "progress", coins: context.coins+10})
                         return;
                     } 
                     if (context.fourthStepStatus == "progress") {
-                        setContext({...context, fourthStepStatus: "done"})
+                        setContext({...context, fourthStepStatus: "done", coins: context.coins+10})
                         return;
                     }
                     if (context.firstStepStatus == "progress") {
-                        setContext({...context, firstStepStatus: "done", secondStepStatus: "progress"})
+                        setContext({...context, firstStepStatus: "done", secondStepStatus: "progress", coins: context.coins+10})
                         return;
                     }
                 }}>

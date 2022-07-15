@@ -4,6 +4,7 @@ const initialState = {
     selectedCategory: undefined,
     selectedGoal: undefined,
     firstStepStatus: "progress",
+    coins: 10,
     // goalCriteria: "c",
     // goalDeadline: "2022-07-07",
     // goalReason: "r"
