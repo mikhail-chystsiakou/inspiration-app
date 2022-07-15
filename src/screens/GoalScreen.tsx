@@ -1,6 +1,8 @@
 import RoundedTextInput from "components/RoundedTextInput";
+import { useContext } from "react";
 import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
 import buttonStyle from "styles/button";
+import { GlobalContext } from "Store";
 
 
 const editIcon = require("assets/goal/edit.png");
@@ -11,40 +13,49 @@ const firewerkIcon = require("assets/goal/firewerk.png");
 const archiveIcon = require("assets/goal/archive.png");
 
 export default ({navigation})=>{
+    const [context, setContext] = useContext(GlobalContext);
+
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
                 <Text style={styles.headerText}>Моя цель</Text>
-                <Image style={styles.smallIcon} source={editIcon}/>
+                <TouchableOpacity
+                    onPress={()=>{
+                        navigation.navigate("DescribeGoal")
+                        console.log("navigating");
+                    } }
+                >
+                    <Image style={styles.smallIcon} source={editIcon}/>
+                </TouchableOpacity>
             </View>
             <View style={styles.goalDescriptionContainer}>
-                <Text style={styles.goalDescriptionText}>Написать слова</Text>
-                <Text style={styles.goalDescriptionText}>Длительность от 2х минут</Text>
-                <Text style={styles.goalDescriptionText}>К 25.12.2022</Text>
-                <Text style={styles.goalDescriptionText}>Чтобы стать музыкантом</Text>
+                <Text style={styles.goalDescriptionText}>{context.goalDescription}</Text>
+                <Text style={styles.goalDescriptionText}>{context.goalCriteria}</Text>
+                <Text style={styles.goalDescriptionText}>К {context.goalDeadline}</Text>
+                <Text style={styles.goalDescriptionText}>{context.goalReason}</Text>
             </View>
             <View style={styles.progresContainer}>
                 <View style={styles.progressRow}>
                     <Image style={[styles.smallIcon, styles.progressIcon]} source={doneIcon}/>
-                    <Text>Написать 1-й куплет</Text>
+                    <Text>{context.goalFirstStep}</Text>
                 </View>
                 <View style={styles.progressSeparator}></View>
 
                 <View style={styles.progressRow}>
                     <Image style={[styles.smallIcon, styles.progressIcon]} source={progressIcon}/>
-                    <Text>Написать 2-й куплет</Text>
+                    <Text>{context.goalSecondStep}</Text>
                 </View>
                 <View style={[styles.progressSeparator, styles.progressSeparatorInactive]}></View>
 
                 <View style={styles.progressRow}>
                     <Image style={[styles.smallIcon, styles.progressIcon]} source={todoIcon}/>
-                    <Text>Сочинить музыку</Text>
+                    <Text>{context.goalThirdStep}</Text>
                 </View>
                 <View style={[styles.progressSeparator, styles.progressSeparatorInactive]}></View>
 
                 <View style={styles.progressRow}>
                     <Image style={[styles.smallIcon, styles.progressIcon]} source={todoIcon}/>
-                    <Text>Записать</Text>
+                    <Text>{context.goalFourthStep}</Text>
                 </View>
                 <View style={[styles.progressSeparator, styles.progressSeparatorInactive]}></View>
 

@@ -20,7 +20,7 @@ const Tab = createBottomTabNavigator();
 const IMAGE_SIZE_SELECTED = 2;
 const IMAGE_SIZE_UNSELECTED = 1;
 
-export default ({navigation}) => {
+export default () => {
     const imageSize = useRef(
         new Animated.Value(IMAGE_SIZE_UNSELECTED)
     ).current;

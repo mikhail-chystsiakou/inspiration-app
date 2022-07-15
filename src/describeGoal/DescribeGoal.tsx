@@ -20,7 +20,7 @@ export default ({navigation}) => {
 
     const _navigation = {
         navigateNextDisabled: !everythingFilled,
-        navigateNext: () => navigation.navigate("GoalConfigurationFinished"),
+        navigateNext: () => navigation.navigate("DescribeGoalAdditional"),
         navigatePrev: () => navigation.navigate("SelectGoal")
     }
     const onCalendarChange = (output) => {

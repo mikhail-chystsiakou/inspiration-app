@@ -4,7 +4,8 @@ import { useRef} from "react";
 const IMAGE_SIZE_SELECTED = 1.5;
 const IMAGE_SIZE_UNSELECTED = 1;
 
-export default ({name, img, selectedItem, setSelectedItem}) => {
+export default ({name, subheader, img, selectedItem, setSelectedItem}) => {
+    console.log(name + " - " + selectedItem)
     const thisSelected = name === selectedItem;
     const otherSelected = selectedItem && !thisSelected;
 
@@ -49,6 +50,8 @@ export default ({name, img, selectedItem, setSelectedItem}) => {
         >
             <Animated.Image style={[styles.image, {transform: [{scale: imageSize}]}]} source={img}/>
             <Text style={styles.text}>{name}</Text>
+            {subheader && <Text style={styles.text}>{subheader}</Text>}
+            
         </Pressable>
     )
 }
@@ -60,15 +63,17 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center",
         width: 0,
-        flex: 1
+        flex: 1,
+        padding: 10,
     },
     image: {
-        width: "50%",
+        width: "65%",
         aspectRatio: 1,
     },
     text: {
         textAlign: "center",
         fontSize: 12,
         fontWeight: "500",
+        wordBreak: "break-word",
     },
 })

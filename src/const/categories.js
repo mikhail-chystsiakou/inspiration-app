@@ -9,7 +9,7 @@ const categories = [
     {name: "Образование", img: require("assets/categories/8.png")}, 
     {name: "Путешествия", img: require("assets/categories/9.png")}, 
     {name: "Сельское хозяйство", img: require("assets/categories/10.png")}, 
-    {name: "Предпренимательство", img: require("assets/categories/11.png")}
+    {name: "Предпринимательство", img: require("assets/categories/11.png")}
 ]
 
 export default categories;

@@ -9,9 +9,9 @@ export default ({header, subHeader, navigation, children}) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>{header}</Text>
-            <Text style={styles.subHeader}>{subHeader}</Text>
-
+            {header && <Text style={styles.header}>{header}</Text>}
+            {subHeader && <Text style={styles.subHeader}>{subHeader}</Text>}
+            
             {children}
 
             <View style={styles.buttonsContainer}>

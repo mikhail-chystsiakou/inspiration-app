@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import SelectCategoryContainer from "selectCategoryGoal/SelectCategoryContainer"
 import SelectGoalContainer from "selectCategoryGoal/SelectGoalContainer"
 import DescribeGoal from "describeGoal/DescribeGoal";
+import DescribeGoalAdditional from "describeGoal/DescribeGoalAdditional";
+import DescribeGoalSteps from "describeGoal/DescribeGoalSteps";
 import GoalConfigurationFinished from "describeGoal/GoalConfigurationFinished";
 import { FirstScreen, SecondScreen, ThirdScreen } from "components/IntroComponents";
 import GoalScreen from "screens/GoalScreen";
@@ -22,6 +24,8 @@ export default () => {
             <Stack.Screen name="SelectCategory" component={SelectCategoryContainer} />
             <Stack.Screen name="SelectGoal" component={SelectGoalContainer} />
             <Stack.Screen name="DescribeGoal" component={DescribeGoal} />
+            <Stack.Screen name="DescribeGoalAdditional" component={DescribeGoalAdditional} />
+            <Stack.Screen name="DescribeGoalSteps" component={DescribeGoalSteps} />
             <Stack.Screen name="GoalConfigurationFinished" component={GoalConfigurationFinished} />
             <Stack.Screen name="GoalScreen" component={TabNavigation} />
         </Stack.Navigator>
