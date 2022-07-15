@@ -12,7 +12,6 @@ export default ({ navigation }) => {
         && context.goalDeadline
         && context.goalReason;
 
-    console.log(context);
     const _navigation = {
         navigateNextDisabled: !everythingFilled,
         navigateNext: () => navigation.navigate("DescribeGoalSteps"),

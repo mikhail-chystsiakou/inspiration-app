@@ -3,9 +3,10 @@ import React, { useState, createContext } from "react"
 const initialState = {
     selectedCategory: undefined,
     selectedGoal: undefined,
-    goalCriteria: "c",
-    goalDeadline: "2022-07-07",
-    goalReason: "r"
+    firstStepStatus: "progress",
+    // goalCriteria: "c",
+    // goalDeadline: "2022-07-07",
+    // goalReason: "r"
 }
 
 export const GlobalContext = React.createContext(initialState);

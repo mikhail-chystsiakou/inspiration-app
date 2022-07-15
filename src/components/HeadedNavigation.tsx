@@ -1,11 +1,32 @@
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Keyboard } from 'react-native';
+import {useState, useEffect} from "react"
 
 export default ({header, subHeader, navigation, children}) => {
     const nextButtonExists = navigation.navigateNext != null;
     const prevButtonExists = navigation.navigatePrev != null;
     const navigateNextLabel = navigation.navigateNextLabel || "Далее";
 
-    console.log()
+    const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener(
+        'keyboardDidShow',
+        () => {
+            setKeyboardVisible(true); // or some other action
+        }
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+        'keyboardDidHide',
+        () => {
+            setKeyboardVisible(false); // or some other action
+        }
+        );
+
+        return () => {
+            keyboardDidHideListener.remove();
+            keyboardDidShowListener.remove();
+        };
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -16,7 +37,7 @@ export default ({header, subHeader, navigation, children}) => {
 
             <View style={styles.buttonsContainer}>
                 {
-                    prevButtonExists &&
+                    !isKeyboardVisible && prevButtonExists &&
                     <TouchableOpacity 
                         style={[styles.button, styles.buttonBack]}
                         onPress={navigation.navigatePrev}>
@@ -24,7 +45,7 @@ export default ({header, subHeader, navigation, children}) => {
                     </TouchableOpacity>
                 }
                 {
-                    nextButtonExists &&
+                    !isKeyboardVisible && nextButtonExists &&
                     <TouchableOpacity 
                         disabled={navigation.navigateNextDisabled}
                         style={[
@@ -44,7 +65,8 @@ export default ({header, subHeader, navigation, children}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20
+        padding: 20,
+        overflow: "hidden",
     },
     header: {
         marginTop: 30,
@@ -86,6 +108,7 @@ const styles = StyleSheet.create({
         color: "#64ACFF",
     },
     buttonsContainer: {
-        flexDirection: "row"
+        flexDirection: "row",
+        overflow: "hidden",
     }
 });

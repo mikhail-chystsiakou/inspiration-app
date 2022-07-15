@@ -18,6 +18,7 @@ export default () => {
         screenOptions={{
             headerShown: false
           }}>
+          {/* <Stack.Screen name="SelectCategory" component={SelectCategoryContainer} /> */}
             <Stack.Screen name="FirstScreen" component={FirstScreen} options={{ headerShown: false }} />
             <Stack.Screen name="SecondScreen" component={SecondScreen} options={{ headerShown: false }} />
             <Stack.Screen name="ThirdScreen" component={ThirdScreen} options={{ headerShown: false }} />

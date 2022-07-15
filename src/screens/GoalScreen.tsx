@@ -1,6 +1,6 @@
 import RoundedTextInput from "components/RoundedTextInput";
-import { useContext } from "react";
-import { View, Image, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useContext, useRef, useState } from "react";
+import { View, Image, Text, StyleSheet, TouchableOpacity, Animated } from "react-native";
 import buttonStyle from "styles/button";
 import { GlobalContext } from "Store";
 
@@ -12,17 +12,46 @@ const doneIcon = require("assets/goal/done.png");
 const firewerkIcon = require("assets/goal/firewerk.png");
 const archiveIcon = require("assets/goal/archive.png");
 
+
+const pepa = require("assets/pepa/pepa.png");
+
+const PEPA_START = 0;
+const PEPA_END = 300;
+
 export default ({navigation})=>{
     const [context, setContext] = useContext(GlobalContext);
+    const [report, setReport] = useState();
+
+    console.log(context.firstStepStatus);
+
+    
+    const pepaBottom = useRef(
+        new Animated.Value(PEPA_START)
+    ).current;
+
+    const pepaStart = () => {
+        Animated.timing(pepaBottom, {
+            toValue: PEPA_START,
+            duration: 150,
+            useNativeDriver: true,
+        }).start();
+    }
+    const pepaEnd = () => {
+        Animated.timing(pepaBottom, {
+            toValue: PEPA_END,
+            duration: 150,
+            useNativeDriver: true,
+        }).start();
+    }
 
     return (
         <View style={styles.container}>
+            {/* <Image style={[styles.pepaStyle, {top: pepaBottom}]} source={pepa}/> */}
             <View style={styles.headerContainer}>
                 <Text style={styles.headerText}>Моя цель</Text>
                 <TouchableOpacity
                     onPress={()=>{
                         navigation.navigate("DescribeGoal")
-                        console.log("navigating");
                     } }
                 >
                     <Image style={styles.smallIcon} source={editIcon}/>
@@ -36,31 +65,64 @@ export default ({navigation})=>{
             </View>
             <View style={styles.progresContainer}>
                 <View style={styles.progressRow}>
-                    <Image style={[styles.smallIcon, styles.progressIcon]} source={doneIcon}/>
+                    {
+                        context.firstStepStatus == "progress"
+                        ? <Image style={[styles.smallIcon, styles.progressIcon]} source={progressIcon}/>
+                        : context.firstStepStatus == "done"
+                            ? <Image style={[styles.smallIcon, styles.progressIcon]} source={doneIcon}/>
+                            : <Image style={[styles.smallIcon, styles.progressIcon]} source={todoIcon}/>
+                    }
+                    {/* <Image style={[styles.smallIcon, styles.progressIcon]} source={doneIcon}/> */}
                     <Text>{context.goalFirstStep}</Text>
                 </View>
-                <View style={styles.progressSeparator}></View>
+                <View style={[styles.progressSeparator, context.firstStepStatus != "done" ? styles.progressSeparatorInactive : {}]}></View>
 
                 <View style={styles.progressRow}>
-                    <Image style={[styles.smallIcon, styles.progressIcon]} source={progressIcon}/>
+                {
+                        context.secondStepStatus == "progress"
+                        ? <Image style={[styles.smallIcon, styles.progressIcon]} source={progressIcon}/>
+                        : context.secondStepStatus == "done"
+                            ? <Image style={[styles.smallIcon, styles.progressIcon]} source={doneIcon}/>
+                            : <Image style={[styles.smallIcon, styles.progressIcon]} source={todoIcon}/>
+                    }
+                    {/* <Image style={[styles.smallIcon, styles.progressIcon]} source={progressIcon}/> */}
                     <Text>{context.goalSecondStep}</Text>
                 </View>
-                <View style={[styles.progressSeparator, styles.progressSeparatorInactive]}></View>
+                <View style={[styles.progressSeparator, context.secondStepStatus != "done" ? styles.progressSeparatorInactive : {}]}></View>
 
                 <View style={styles.progressRow}>
-                    <Image style={[styles.smallIcon, styles.progressIcon]} source={todoIcon}/>
+                {
+                        context.thirdStepStatus == "progress"
+                        ? <Image style={[styles.smallIcon, styles.progressIcon]} source={progressIcon}/>
+                        : context.thirdStepStatus == "done"
+                            ? <Image style={[styles.smallIcon, styles.progressIcon]} source={doneIcon}/>
+                            : <Image style={[styles.smallIcon, styles.progressIcon]} source={todoIcon}/>
+                    }
+                    {/* <Image style={[styles.smallIcon, styles.progressIcon]} source={todoIcon}/> */}
                     <Text>{context.goalThirdStep}</Text>
                 </View>
-                <View style={[styles.progressSeparator, styles.progressSeparatorInactive]}></View>
+                <View style={[styles.progressSeparator, context.thirdStepStatus != "done" ? styles.progressSeparatorInactive : {}]}></View>
 
                 <View style={styles.progressRow}>
-                    <Image style={[styles.smallIcon, styles.progressIcon]} source={todoIcon}/>
+                {
+                        context.fourthStepStatus == "progress"
+                        ? <Image style={[styles.smallIcon, styles.progressIcon]} source={progressIcon}/>
+                        : context.fourthStepStatus == "done"
+                            ? <Image style={[styles.smallIcon, styles.progressIcon]} source={doneIcon}/>
+                            : <Image style={[styles.smallIcon, styles.progressIcon]} source={todoIcon}/>
+                    }
+                    {/* <Image style={[styles.smallIcon, styles.progressIcon]} source={todoIcon}/> */}
                     <Text>{context.goalFourthStep}</Text>
                 </View>
-                <View style={[styles.progressSeparator, styles.progressSeparatorInactive]}></View>
+                <View style={[styles.progressSeparator, context.fourthStepStatus != "done" ? styles.progressSeparatorInactive : {}]}></View>
 
                 <View style={styles.progressRow}>
-                    <Image style={[styles.smallIcon, styles.progressIcon]} source={todoIcon}/>
+                {
+                        context.fourthStepStatus == "done"
+                        ? <Image style={[styles.smallIcon, styles.progressIcon]} source={doneIcon}/>
+                        : <Image style={[styles.smallIcon, styles.progressIcon]} source={todoIcon}/>
+                    }
+                    {/* <Image style={[styles.smallIcon, styles.progressIcon]} source={todoIcon}/> */}
                     <Text>Цель достигута! </Text>
                     <Image style={styles.smallIcon} source={firewerkIcon}/>
                 </View>
@@ -68,16 +130,40 @@ export default ({navigation})=>{
             <View style={{flexGrow: 1, justifyContent: "flex-end", marginBottom: 70}}>
 
 
-                <TouchableOpacity style={[buttonStyle.enabled, {marginBottom: 5, marginTop: 0, opacity: 0.3}]}
+                {/* <TouchableOpacity style={[buttonStyle.enabled, {marginBottom: 5, marginTop: 0, opacity: 0.3}]}
                 onPress={()=>navigation.navigate("FirstScreen")}>
                     <Text style={buttonStyle.buttonText}>Начать все с начала (временная кнопка)</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
                 <RoundedTextInput
                     placeholder="Загрузи файл (pdf, docx, excel)"
                     style={styles.fileInput}
+                    value={report}
+                    onChangeText={(v)=>setReport(v)}
                 ></RoundedTextInput>
-                <TouchableOpacity style={[buttonStyle.enabled, {marginBottom: 5, marginTop: 0}]}>
+                <TouchableOpacity style={[buttonStyle.enabled, {marginBottom: 5, marginTop: 0}]}
+                onPress={() => {
+                    pepaStart();
+                    setReport("")
+                    if (context.secondStepStatus == "progress") {
+                        console.log("gosecond")
+                        setContext({...context, secondStepStatus: "done", thirdStepStatus: "progress"})
+                        return;
+                    } 
+                    if (context.thirdStepStatus == "progress") {
+                        console.log("gosecond2")
+                        setContext({...context, thirdStepStatus: "done", fourthStepStatus: "progress"})
+                        return;
+                    } 
+                    if (context.fourthStepStatus == "progress") {
+                        setContext({...context, fourthStepStatus: "done"})
+                        return;
+                    }
+                    if (context.firstStepStatus == "progress") {
+                        setContext({...context, firstStepStatus: "done", secondStepStatus: "progress"})
+                        return;
+                    }
+                }}>
                     <Text style={buttonStyle.buttonText}>Отправить отчет</Text>
                 </TouchableOpacity>
                 <View style={[styles.progressRow, {marginVertical: 10}]}>
@@ -90,6 +176,12 @@ export default ({navigation})=>{
 }
 
 const styles = StyleSheet.create({
+    pepaStyle: {
+        height: 268,
+        width: 335,
+        position: "absolute",
+        zIndex: 100,
+    },
     container: {
         flex: 1,
         padding: 20,

@@ -6,8 +6,6 @@ import { GlobalContext } from "Store";
 export default ({navigation}) => {
     const [context, setContext] = useContext(GlobalContext);
 
-    console.log("finish: " + JSON.stringify(context));
-
     const _navigation = {
         navigateNext: () => {navigation.navigate("GoalScreen")},
         navigateNextLabel: "Перейти к каналам",

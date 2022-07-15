@@ -11,10 +11,15 @@ import { Image, Animated } from "react-native";
 import {useRef} from "react";
 
 const goalIcon = require("assets/navigation/goal.png");
+const goalBigIcon = require("assets/navigation/goal_big.png");
 const messageIcon = require("assets/navigation/message.png");
+const messageBigIcon = require("assets/navigation/message_big.png");
 const newsIcon = require("assets/navigation/news.png");
+const newsBigIcon = require("assets/navigation/news_big.png");
 const pigIcon = require("assets/navigation/pig.png");
+const pigBigIcon = require("assets/navigation/big_pig.png");
 const userIcon = require("assets/navigation/user.png");
+const userBigIcon = require("assets/navigation/user_big.png");
 
 const Tab = createBottomTabNavigator();
 const IMAGE_SIZE_SELECTED = 2;
@@ -61,44 +66,47 @@ export default () => {
         >
             <Tab.Screen name="Profile" component={ProfileScreen} options={{
                 tabBarIcon: ({focused}) => {
-                    return <Image source={userIcon} 
-                    style={[
-                        {height: 24, width: 24}, 
-                        focused && {transform: [{scale: 1.5}]}
-                    ]} />
+                    return (
+                        focused 
+                        ? <Image source={userBigIcon} style={{height: 32, width: 32}}/>
+                        : <Image source={userIcon} style={{height: 24, width: 24}}/>
+                    )
                 }
             }}/>
             <Tab.Screen name="Chat" component={ChatScreen} options={{
                 tabBarIcon: ({focused}) => {
-                    return <Image source={messageIcon} style={[
-                        {height: 24, width: 24}, 
-                        focused && {transform: [{scale: 1.5}]}
-                    ]} />
+                    return (
+                        focused 
+                        ? <Image source={messageBigIcon} style={{height: 32, width: 32}}/>
+                        : <Image source={messageIcon} style={{height: 24, width: 24}}/>
+                    )
                 }
             }}/>
             <Tab.Screen name="Goal" children={() => <GoalScreen navigation={navigation} />} options={{
                 tabBarIcon: ({focused}) => {
-                    // return <FontAwesomeIcon icon="mug-saucer"/>
-                    return <Image source={goalIcon} style={[
-                        {height: 32, width: 32}, 
-                        focused && {transform: [{scale: 1.4}]}
-                    ]} />
+                    return (
+                        focused 
+                        ? <Image source={goalBigIcon} style={{height: 32, width: 32}}/>
+                        : <Image source={goalIcon} style={{height: 24, width: 24}}/>
+                    )
                 }
             }}/>
             <Tab.Screen name="News" component={NewsScreen} options={{
                 tabBarIcon: ({focused}) => {
-                    return <Image source={newsIcon} style={[
-                        {height: 24, width: 32}, 
-                        focused && {transform: [{scale: 1.5}]}
-                    ]} />
+                    return (
+                        focused 
+                        ? <Image source={newsBigIcon} style={{height: 28, width: 32}}/>
+                        : <Image source={newsIcon} style={{height: 24, width: 28}}/>
+                    )
                 }
             }}/>
             <Tab.Screen name="Coins" component={CoinsScreen} options={{
                 tabBarIcon: ({focused}) => {
-                    return <Image source={pigIcon} style={[
-                        {height: 24, width: 24}, 
-                        focused && {transform: [{scale: 1.5}]}
-                    ]} />
+                    return (
+                        focused 
+                        ? <Image source={pigBigIcon} style={{height: 32, width: 32}}/>
+                        : <Image source={pigIcon} style={{height: 24, width: 24}}/>
+                    )
                 }
             }}/>
         </Tab.Navigator>

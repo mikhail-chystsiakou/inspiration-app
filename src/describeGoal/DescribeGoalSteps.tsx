@@ -12,7 +12,6 @@ export default ({ navigation }) => {
         && context.goalThirdStep
         && context.goalFourthStep;
 
-    console.log(context);
     const _navigation = {
         navigateNextDisabled: !everythingFilled,
         navigateNext: () => navigation.navigate("GoalConfigurationFinished"),

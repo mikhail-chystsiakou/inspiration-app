@@ -1,6 +1,5 @@
 import { Text, View, StyleSheet, Image, Pressable, TouchableOpacity } from "react-native";
 import ideasShop from "const/ideasShop"
-import SelectItemScreen from "selectCategoryGoal/SelectItemScreen";
 import ItemPreview from "selectCategoryGoal/ItemPreview";
 import { useState } from "react";
 
@@ -28,10 +27,11 @@ export default () => {
                 {ideasShop.map(c => {
                     return (
                     <ItemPreview key={c.name} 
-                        name={c.name} img={c.img} subheader={
+                        name={c.name} img={c.img} 
+                        subheader={
                             <View style={{marginTop: 5, flexDirection: "row", alignItems: "center"}}>
-                            <Image source={coinIcon} style={styles.smallCoin} />
-                            <Text style={styles.text}> {c.cost}</Text>
+                                <Image source={coinIcon} style={styles.smallCoin} />
+                                <Text style={styles.text}> {c.cost}</Text>
                             </View>
                         }
                         selectedItem={items.selected}
@@ -41,6 +41,7 @@ export default () => {
                 })
             }
          </View>
+         <Text style={[styles.suggest]}>Предложить идею</Text>
         </View> 
     )
 }
